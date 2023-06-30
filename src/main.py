@@ -77,6 +77,14 @@ def main():
 
 
 def get_html_file_title_from_url(url: str):
+	"""
+	Get the title of an HTML file from a given URL.
+
+	:param url: The URL of the HTML file.
+	:type url: str
+	:return: The title of the HTML file, or None if the URL is invalid.
+	:rtype: str or None
+	"""
 	try:
 		req = requests.get(url)
 		if req.status_code == 404:
@@ -95,12 +103,28 @@ def get_html_file_title_from_url(url: str):
 
 
 def generate_url_from_problem_name(name: int | str) -> str:
+	"""
+	Generates a URL from the given problem name.
+
+	:param name: The problem name as an integer or string.
+	:type name: int or str
+	:return: The generated URL as a string.
+	:rtype: str
+	"""
 	template_url = 'https://www.beecrowd.com.br/repository/UOJ_????_en.html'
 	result_url = template_url.replace("????", str(name))
 	return result_url
 
 
 def normalize_title(title: str) -> str:
+	"""
+	Normalize the title by extracting the year and the main title.
+	
+	:param title: The original title to be normalized.
+	:type title: str
+	:return: The normalized title.
+	:rtype: str
+	"""
 	pattern = r'(\d{4})(\s+?\d{4}\s+?)?( ?- ?)?(.*)$'
 	striped = ' '.join(title.split()).removeprefix("bee").strip()
 	match = re.search(pattern, striped)
