@@ -36,6 +36,7 @@ def main():
 	path_from, path_to = sys.argv[1:3]
 
 	print_header(f"Transferring files from '{path_from}' to '{path_to}'", end="\n\n")
+	
 	for folder_name in FOLDERS_NAMES:
 		folder_path_to = os.path.abspath(os.path.join(path_to, folder_name))
 		folder_path_from = os.path.abspath(os.path.join(path_from, folder_name))
@@ -50,6 +51,7 @@ def main():
 			continue
 
 		print_info(f"Copying files from '{folder_path_from}' to '{folder_path_to}'...")
+		
 		for (file_name, file_extension) in files:
 			if file_extension in VALID_FILE_EXTENSIONS:
 				original_file_name = f"{file_name}{file_extension}"
@@ -59,14 +61,16 @@ def main():
 
 				subcommands.copy_file(file_path_from, folder_path_to)
 
-				if file_name.find('.') != -1:
+				if '.' in file_name != -1:
 					subcommands.move_file(os.path.join(folder_path_to, original_file_name), file_path_to)
 
-		print_info(f"Formatting file before commit then...")
+		print_info(f"Formatting files on '{folder_path_to}' directory before commit then...")
+
 		if subcommands.format_files(folder_path_to) is False:
 			continue
 
 		print_info(f"Committing files from '{folder_path_from}' to '{folder_path_to}'...")
+
 		for (file_name, file_extension) in subcommands.list_files(folder_path_to):
 			file_path = os.path.join(folder_path_to, f"{file_name}{file_extension}")
 			problem_url = generate_url_from_problem_name(file_name)
@@ -138,5 +142,4 @@ def normalize_title(title: str) -> str:
 
 if __name__ == "__main__":
 	main()
-
 
