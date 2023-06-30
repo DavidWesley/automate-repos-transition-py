@@ -1,16 +1,16 @@
 import logging
 
 logger = logging.getLogger('Automator Repo Transitioning')
-filehandler1 = logging.FileHandler(filename="automator-error.log", mode="a")
-filehandler2 = logging.FileHandler(filename="automator-debug.log", mode="a")
+error_file_handler = logging.FileHandler(filename="automator-error.log", mode="a")
+debug_file_handler = logging.FileHandler(filename="automator-debug.log", mode="a")
 formatter = logging.Formatter(fmt='%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y/%m/%d %H:%M:%S')
 
 logger.setLevel(logging.DEBUG)
-filehandler1.setLevel(logging.WARNING)
-filehandler2.setLevel(logging.DEBUG)
+error_file_handler.setLevel(logging.WARNING)
+debug_file_handler.setLevel(logging.DEBUG)
 
-filehandler1.setFormatter(formatter)
-filehandler2.setFormatter(formatter)
+error_file_handler.setFormatter(formatter)
+debug_file_handler.setFormatter(formatter)
 
-logger.addHandler(filehandler1)
-logger.addHandler(filehandler2)
+logger.addHandler(error_file_handler)
+logger.addHandler(debug_file_handler)
