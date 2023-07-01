@@ -23,7 +23,7 @@ def format_files(folder_path: str) -> bool:
 
 	try:
 		subprocess.run('npm run lint:all', shell=True, check=True)
-	except:
+	except Exception:
 		print_warning(f"Could not lint the files in '{folder_path}'")
 		return False
 
@@ -42,7 +42,7 @@ def move_file(filepath: str, path_destination: str) -> None:
 
 	try:
 		subprocess.run(["mv", filepath, path_destination])
-	except:
+	except Exception:
 		print_warning(f"Could not move file '{filepath}' to '{path_destination}'")
 
 
@@ -61,7 +61,7 @@ def copy_file(filepath: str, folder_destination: str) -> None:
 
 	try:
 		subprocess.run(["cp", filepath, folder_destination])
-	except:
+	except Exception:
 		print_warning(f"Could not copy file '{filepath}' to '{folder_destination}'")
 
 
@@ -79,5 +79,5 @@ def commit_file(filepath: str, message: str) -> None:
 		subprocess.run('git reset', shell=True)
 		subprocess.run(['git', 'add', filepath])
 		subprocess.run(['git', 'commit', '-m', message, "--no-verify"])
-	except:
+	except Exception:
 		print_warning(f"Could not commit the file '{filepath}' with the message '{message}'")

@@ -101,7 +101,7 @@ def get_html_file_title_from_url(url: str):
 			soup = BeautifulSoup(html, 'html.parser')
 			if soup.title is not None:
 				return soup.title.text
-	except:
+	except Exception:
 		print_warning(f"It appears that the path '{url}' is not valid")
 		return None
 
